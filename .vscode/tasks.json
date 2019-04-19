@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-o",
+                "cpp.out",
+
+                "main.cpp",
+                "perlinNoise/*",                
+                "cubeTexture.cpp",                
+               
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Execute",
+            "type": "shell",
+            "command": "chmod a+x cpp.out ; ./cpp.out",
+            "args": [                                        
+               
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
