@@ -1,3 +1,4 @@
+#pragma once
 /* цвета для куба */
 #define c_red 0
 #define c_green 1

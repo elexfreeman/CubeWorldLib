@@ -1,3 +1,4 @@
+#pragma once
 /* цвета для куба */
 #include "cubeTexture.h"
 
