@@ -9,3 +9,5 @@ CubeWorldLib.vcxproj.user
 CubeWorldLib.vcxproj
 CubeWorldLib.sln
 cpp.out
+cpp.o
+main.o

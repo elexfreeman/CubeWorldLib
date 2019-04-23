@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -7,12 +9,13 @@
 #include "perlinNoise/ppm.h"
 #include "cubeTexture.h"
 #include <time.h> 
+#include "core/WorldArray.h"
 
 #define PI 3.14159265
 
-#define SCALE 300
-#define SCALE_S 4
-#define SCALE_D 1
+#define SCALE 100
+#define SCALE_S 0.1
+#define SCALE_D 2
 using namespace std;
 
 
@@ -104,6 +107,6 @@ int main()
 	clock_t end = clock();
 	double sec = (double)((end - start) / (CLOCKS_PER_SEC)) * 1000;
 	printf("The time: %f ms\n", sec);
-	std::cin.get();
+	//std::cin.get();
 	return 0;
 }

@@ -2,6 +2,18 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "run",
+            "type": "shell",
+            "command": "make; make run",
+            "args": [                                
+               
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "build",
             "type": "shell",
             "command": "g++",
@@ -12,7 +24,8 @@
 
                 "main.cpp",
                 "perlinNoise/*",                
-                "cubeTexture.cpp",                
+                "cubeTexture.cpp"
+               
                
             ],
             "group": {
