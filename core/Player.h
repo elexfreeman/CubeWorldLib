@@ -2,19 +2,23 @@
 
 #include "WorldArray.h"
 
+
 /* Класс данных об мире или участка мира */
 class PlayerClass
 {
     /* координаты игрока */
     int x, y;
+    /* высота и ширина видимой области */
+    int width, height;
 
-    WorldArrayClass visibleWorld;
+    /* видимая область */
+    WorldArrayClass* visibleWorld;
     
 
 public:
-    PlayerClass(int x, int y);      
+    PlayerClass(int x, int y, int w, int h);      
 
     ~PlayerClass();
 
-    void getVisibleWorld();
+    int getVisibleWorld(WorldArrayClass *worldArray);
 };

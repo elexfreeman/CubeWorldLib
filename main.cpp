@@ -7,21 +7,20 @@
 #include <string>
 #include "perlinNoise/PerlinNoise.h"
 #include "perlinNoise/ppm.h"
-#include "cubeTexture.h"
-#include <time.h> 
+#include "core/cubeTexture.h"
+#include <time.h>
 #include "core/WorldArray.h"
+#include "core/Player.h"
 
 #define PI 3.14159265
 
-#define SCALE 100
+#define SCALE 10
 #define SCALE_S 0.1
 #define SCALE_D 2
 using namespace std;
 
-
-int main()
+void generate()
 {
-
 	// Define the size of the image
 	unsigned int width = 2048, height = 2048;
 	unsigned int kk;
@@ -35,9 +34,7 @@ int main()
 
 	cubeTexture color;
 
-
 	clock_t start = clock();
-	
 
 	for (int jj = 1; jj <= 1; jj++)
 	{
@@ -101,12 +98,34 @@ int main()
 			// Save the image in a binary PPM file
 
 		} //y
-		
+
 	} //jj
 	image.write("figure_8_R.ppm");
 	clock_t end = clock();
 	double sec = (double)((end - start) / (CLOCKS_PER_SEC)) * 1000;
 	printf("The time: %f ms\n", sec);
+}
+
+int main()
+{
+
+	WorldArrayClass *world;
+	PlayerClass *player;
+
+	world = new WorldArrayClass(50, 50);
+	player = new PlayerClass(0, 0, 3, 3);
+
+	world->setXY(0, 0, 1);
+	std::cout << world->getXY(0, 0);
+	std::cout << player->getVisibleWorld(world) << "\r\n";
+
+	world->generate(SCALE, SCALE_D, SCALE_S);
+	std::cout << world->getXY(0, 0);
+	std::cout << player->getVisibleWorld(world);
+
+	world->line(1, 1, 4, 6, 1);
+	world->print();
+
 	//std::cin.get();
 	return 0;
-}
+};
