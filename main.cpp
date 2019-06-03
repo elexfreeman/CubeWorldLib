@@ -109,22 +109,29 @@ void generate()
 int main()
 {
 
+	/* мир */
 	WorldArrayClass *world;
+	/* игрок */
 	PlayerClass *player;
+	/* видимый мир игрока */
+	WorldArrayClass *visibleWorld;
 
+	/* инициализируем классы */
 	world = new WorldArrayClass(50, 50);
 	player = new PlayerClass(0, 0, 3, 3);
 
-	world->setXY(0, 0, 1);
-	std::cout << world->getXY(0, 0);
-	std::cout << player->getVisibleWorld(world) << "\r\n";
-
+	
+	/* генерируем мир */
 	world->generate(SCALE, SCALE_D, SCALE_S);
-	std::cout << world->getXY(0, 0);
-	std::cout << player->getVisibleWorld(world);
+	
+	/* получаем видимый мир игрока */
+	visibleWorld = player->getVisibleWorld(world);
+	
 
 	world->line(1, 1, 4, 6, 1);
 	world->print();
+
+	visibleWorld->print();
 
 	//std::cin.get();
 	return 0;

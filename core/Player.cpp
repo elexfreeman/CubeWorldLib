@@ -2,11 +2,14 @@
 
 #include "Player.h"
 
-PlayerClass::PlayerClass(int x, int y, int w, int h)
+PlayerClass::PlayerClass(int xx, int yy, int w, int h)
 {
     width = w;
     height = height;
     visibleWorld = new WorldArrayClass(w, h);
+
+    x = xx;
+    y = yy;
 }
 
 PlayerClass::~PlayerClass()
@@ -14,7 +17,13 @@ PlayerClass::~PlayerClass()
     delete visibleWorld;
 }
 
-int PlayerClass::getVisibleWorld(WorldArrayClass *worldArray)
+WorldArrayClass *PlayerClass::getVisibleWorld(WorldArrayClass *worldArray)
 {
-    return worldArray->getXY(0, 0);
+    return visibleWorld;
+}
+
+void PlayerClass::setXY(int xx, int yy)
+{
+    x = xx;
+    y = yy;
 }

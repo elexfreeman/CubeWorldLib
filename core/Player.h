@@ -2,7 +2,6 @@
 
 #include "WorldArray.h"
 
-
 /* Класс данных об мире или участка мира */
 class PlayerClass
 {
@@ -12,13 +11,21 @@ class PlayerClass
     int width, height;
 
     /* видимая область */
-    WorldArrayClass* visibleWorld;
-    
+    WorldArrayClass *visibleWorld;
 
 public:
-    PlayerClass(int x, int y, int w, int h);      
+
+    /* 
+        x, y - координаты в пространстве
+        w, h - ширина и высота видимой области
+    */
+    PlayerClass(int xx, int yy, int w, int h);
 
     ~PlayerClass();
 
-    int getVisibleWorld(WorldArrayClass *worldArray);
+    /* устанавливает координаты */
+    void setXY(int xx, int yy);
+
+    /* выдает область видимости игрока */
+    WorldArrayClass *getVisibleWorld(WorldArrayClass *worldArray);
 };

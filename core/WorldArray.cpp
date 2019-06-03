@@ -2,6 +2,9 @@
 #include "WorldArray.h"
 #include <cmath>
 
+/* 
+    w,h - высота и ширина карты
+ */
 WorldArrayClass::WorldArrayClass(unsigned int w, unsigned int h)
 {
     width = w;
@@ -21,6 +24,7 @@ WorldArrayClass::~WorldArrayClass()
     delete world;
 }
 
+/* получает значение в точке мира */
 int WorldArrayClass::getXY(unsigned int x, unsigned int y)
 {
     if (x >= width)
@@ -34,6 +38,7 @@ int WorldArrayClass::getXY(unsigned int x, unsigned int y)
     return world[x + height * y];
 }
 
+/* устанавливает значение в точке мира */
 void WorldArrayClass::setXY(unsigned int x, unsigned int y, int val)
 {
     if ((x < width) && (y < height))
@@ -42,6 +47,7 @@ void WorldArrayClass::setXY(unsigned int x, unsigned int y, int val)
     }
 }
 
+/* гнератор мира */
 void WorldArrayClass::generate(double scale, double scale_d, double scale_s)
 {
 
@@ -104,6 +110,7 @@ void WorldArrayClass::print()
     }
 }
 
+/* рисует линию в мире */
 void WorldArrayClass::line(int x0, int y0, int x1, int y1, int color)
 {
     int A, B, sign;
