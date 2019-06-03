@@ -19,6 +19,12 @@ PlayerClass::~PlayerClass()
 
 WorldArrayClass *PlayerClass::getVisibleWorld(WorldArrayClass *worldArray)
 {
+    /* начинаем обход с стартовой похиции игрока */
+
+    /* вверх и вправо */
+    /* вправо и вниз */
+    /* вниз и влево */
+    /* влево и вверх */
     return visibleWorld;
 }
 
