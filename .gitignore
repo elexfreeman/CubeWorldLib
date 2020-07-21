@@ -11,3 +11,6 @@ CubeWorldLib.sln
 cpp.out
 cpp.o
 main.o
+ql.o
+term.o.dSYM
+ql.o.dSYM
