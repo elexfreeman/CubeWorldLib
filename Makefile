@@ -7,5 +7,8 @@ ql:
 qlrun:
 	g++ -lncurses -std=gnu++11  -stdlib=libc++ -Wall -g ql.cpp -o ql.o && ./ql.o
 
+keysrun:
+	g++ -lncurses -std=gnu++11  -stdlib=libc++ -Wall -g keys.cpp -o keys.o && ./keys.o
+
 run : 
 	./main.o
