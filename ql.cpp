@@ -4,9 +4,74 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <list>
+#include <unistd.h>
 
 #define mx 20
 #define my 80
+
+struct Coord
+{
+    int X;
+    int Y;
+};
+
+class MAction
+{
+    void fDo()
+    {
+    }
+};
+
+class MObject
+{
+protected:
+    int state = 0;
+
+public:
+    Coord loc;
+
+    Coord newLoc;
+
+    void Tick()
+    {
+        if (state == 1)
+        {
+            ActionMoveToLoc();
+        }
+    }
+
+    void ActionMoveToLoc()
+    {
+    }
+
+    void fMoveToLoc(Coord _newLoc)
+    {
+        if (state == 0)
+        {
+            this->newLoc = _newLoc;
+            this->state = 1; // move to loc
+        }
+    }
+};
+
+class MyWorld
+{
+public:
+    std::list<MObject *> aObject;
+
+    void Loop()
+    {
+        while (true)
+        {
+            for (auto it = aObject.begin(); it != aObject.end(); ++it)
+            {
+                (*it)->Tick();
+            }
+            usleep(300);
+        }
+    }
+};
 
 class World
 {
@@ -14,6 +79,8 @@ private:
     int aMatrix[mx][my] = {};
 
 public:
+    std::list<MObject *> aObject;
+
     World()
     {
         for (int x = 0; x < mx; x++)
