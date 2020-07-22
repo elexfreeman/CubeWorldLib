@@ -1,19 +1,20 @@
-#include <iostream>
-#include <cmath>
 #include <ncurses.h>
-#include <string>
 #include <stdio.h>
 #include <stdlib.h>
-#include <list>
 #include <unistd.h>
+
+#include <cmath>
+#include <iostream>
+#include <list>
+#include <string>
 
 #define mx 20
 #define my 80
 
 struct Coord
 {
-    int X;
-    int Y;
+    float X;
+    float Y;
 };
 
 class MAction
@@ -33,6 +34,13 @@ public:
 
     Coord newLoc;
 
+    float speed = 4;
+
+    int fGetState()
+    {
+        return state;
+    }
+
     void Tick()
     {
         if (state == 1)
@@ -43,6 +51,16 @@ public:
 
     void ActionMoveToLoc()
     {
+        if (state == 1)
+        {
+            loc.X = (loc.X + (newLoc.X - loc.X) / speed);
+            loc.Y = (loc.Y + (newLoc.Y - loc.Y) / speed);
+
+            if ((std::round(loc.X) == std::round(newLoc.X)) && (std::round(loc.Y) == std::round(newLoc.Y)))
+            {
+                state = 0;
+            }
+        }
     }
 
     void fMoveToLoc(Coord _newLoc)
@@ -69,6 +87,42 @@ public:
                 (*it)->Tick();
             }
             usleep(300);
+        }
+    }
+};
+
+class Screen
+{
+public:
+    int aMatrix[mx][my] = {};
+
+    void fClear()
+    {
+        for (int x = 0; x < mx; x++)
+        {
+            for (int y = 0; y < my; y++)
+            {
+                aMatrix[x][y] = 0;
+            }
+        }
+    }
+
+    void fPrint()
+    {
+        for (int x = 0; x < mx; x++)
+        {
+            for (int y = 0; y < my; y++)
+            {
+                if (aMatrix[x][y] == 0)
+                {
+                    printw(" ");
+                }
+                else
+                {
+                    printw("%d", aMatrix[x][y]);
+                }
+            }
+            printw("\n");
         }
     }
 };
@@ -109,7 +163,14 @@ public:
         {
             for (int y = 0; y < my; y++)
             {
-                printw("%d", aMatrix[x][y]);
+                if (aMatrix[x][y] == 0)
+                {
+                    printw(" ");
+                }
+                else
+                {
+                    printw("%d", aMatrix[x][y]);
+                }
             }
             printw("\n");
         }
@@ -125,7 +186,7 @@ public:
             {
                 if (!((dx == x) && (dy == y)))
                 {
-                    val = floor(9 - std::sqrt(((dx - x) * (dx - x)) + ((dy - y) * (dy - y))));
+                    val = std::round(9 - std::sqrt(((dx - x) * (dx - x)) + ((dy - y) * (dy - y))));
 
                     if ((val > 0) && (aMatrix[x][y] != 9))
                     {
@@ -139,7 +200,6 @@ public:
 
 void screen1()
 {
-
     initscr();                // Переход в curses-режим
     printw("Hello world!\n"); // Отображение приветствия в буфер
     refresh();                // Вывод приветствия на настоящий экран
@@ -154,16 +214,38 @@ void screen1()
 
 int main()
 {
+
+    MObject *obj = new MObject();
+    obj->loc.X = 1.0;
+    obj->loc.Y = 1.0;
+
     initscr();
 
-    World *world = new World();
+    Coord loc;
+    loc.X = 15.0;
+    loc.Y = 30;
+    obj->fMoveToLoc(loc);
 
-    world->fPoint(5, 5);
-    world->fPoint(15, 15);
-    world->fPrint();
+    Screen *scr = new Screen;
 
-    refresh(); // Вывод приветствия на настоящий экран
+    int x = 10;
+    int y = 30;
 
-    getch(); // Ожидание нажатия какой-либо клавиши пользователем
+    while (obj->fGetState() != 0)
+    {
+        sleep(1);
+        clear();
+        /* code */
+        scr->fClear();
+        x = std::round(obj->loc.X);
+        y = std::round(obj->loc.Y);
+        scr->aMatrix[x][y] = 9;
+        obj->Tick();
+        scr->fPrint();
+        printw("x=%f y=%f", obj->loc.X, obj->loc.Y);
+        refresh();
+    }
+
+    getch();
     endwin();
 }
