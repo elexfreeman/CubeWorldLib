@@ -14,3 +14,4 @@ main.o
 ql.o
 term.o.dSYM
 ql.o.dSYM
+*.o
