@@ -1,5 +1,6 @@
 #pragma once
-#include "conf.h"
+
+#include "conf.cpp"
 #include "Screen.cpp"
 #include <list>
 #include "MObject.cpp"
@@ -13,14 +14,20 @@ protected:
 public:
     World(Screen *_scr)
     {
-        this->scr = scr;
+        this->scr = _scr;
     }
 
+    /**
+     * Добавить объект в мир 
+     * */
     void fAddObj(MObject *obj)
     {
         this->aObject.push_back(obj);
     }
 
+    /**
+     * Тики объктов 
+     * */
     void Tick()
     {
         for (auto it = aObject.begin(); it != aObject.end(); ++it)
@@ -29,6 +36,9 @@ public:
         }
     }
 
+    /**
+     * вывод на экран 
+     * */
     void fPrint()
     {
         int x, y;

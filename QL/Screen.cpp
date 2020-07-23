@@ -1,6 +1,6 @@
 #pragma once
 #include <ncurses.h>
-#include "conf.h"
+#include "conf.cpp"
 
 class Screen
 {

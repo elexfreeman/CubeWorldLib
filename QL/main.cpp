@@ -11,7 +11,7 @@
 
 #include "MObject.cpp"
 #include "Screen.cpp"
-
+#include "World.cpp"
 
 class MyWorld
 {
@@ -36,9 +36,11 @@ public:
 int main()
 {
 
+
     MObject *obj = new MObject();
     obj->loc.X = 1.0;
     obj->loc.Y = 1.0;
+
 
     initscr();
 
@@ -49,6 +51,8 @@ int main()
 
     Screen *scr = new Screen;
 
+    World* world = new World(scr);
+    world->fAddObj(obj);
     int x = 10;
     int y = 30;
 
@@ -56,13 +60,9 @@ int main()
     {
         sleep(1);
         clear();
-        /* code */
-        scr->fClear();
-        x = std::round(obj->loc.X);
-        y = std::round(obj->loc.Y);
-        scr->aMatrix[x][y] = 9;
-        obj->Tick();
-        scr->fPrint();
+
+        world->Tick();
+        world->fPrint();
         printw("x=%f y=%f", obj->loc.X, obj->loc.Y);
         refresh();
     }
