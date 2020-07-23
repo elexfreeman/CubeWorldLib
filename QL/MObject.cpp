@@ -3,13 +3,11 @@
 #include <stdlib.h>
 #include <cmath>
 
-
 struct Coord
 {
     float X;
     float Y;
 };
-
 
 class MObject
 {
@@ -57,5 +55,13 @@ public:
             this->newLoc = _newLoc;
             this->state = 1; // move to loc
         }
+    }
+
+    /**
+     * Проверка на возможность отображать на экране 
+     */
+    bool fIsVisible(int maxX, int maxY)
+    {
+        return (loc.X < maxX) && (loc.X >= 0) && (loc.Y < maxY) && (loc.Y >= 0);
     }
 };

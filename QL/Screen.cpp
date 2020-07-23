@@ -1,9 +1,6 @@
 #pragma once
-
-#define mx 20
-#define my 80
 #include <ncurses.h>
-
+#include "conf.h"
 
 class Screen
 {
