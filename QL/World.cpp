@@ -75,7 +75,7 @@ public:
     void fAddRnfPoint()
     {
         MObject* obj = new MObject;
-        obj->loc = fGetRandomLoc();
+        obj->loc = this->fGetRandomLoc();
         fAddObj(obj);
     }
 };

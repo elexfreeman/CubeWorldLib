@@ -19,7 +19,7 @@ public:
 
     Coord newLoc;
 
-    float speed = 4;
+    float speed = 20;
 
     int fGetState()
     {
