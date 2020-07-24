@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <ctime>
 #include <cmath>
 #include <iostream>
 #include <list>
@@ -31,39 +32,38 @@ public:
     // }
 };
 
-
-
 int main()
 {
-
-
+    std::srand(std::time(nullptr)); // рандомизация генератора случайных чисел
     MObject *obj = new MObject();
-    obj->loc.X = 1.0;
-    obj->loc.Y = 1.0;
-
+    MObject *obj2 = new MObject();
 
     initscr();
 
-    Coord loc;
-    loc.X = 15.0;
-    loc.Y = 30;
-    obj->fMoveToLoc(loc);
-
     Screen *scr = new Screen;
 
-    World* world = new World(scr);
-    world->fAddObj(obj);
-    int x = 10;
-    int y = 30;
+    World *world = new World(scr);
 
-    while (obj->fGetState() != 0)
+    world->fAddRnfPoint();
+    world->fAddRnfPoint();
+    world->fAddRnfPoint();
+    world->fAddRnfPoint();
+    world->fAddRnfPoint();
+
+    while (true)
     {
-        sleep(1);
+        usleep(100000);
         clear();
 
+        for (auto it = world->aObject.begin(); it != world->aObject.end(); ++it)
+        {
+            if ((*it)->fGetState() == 0)
+            {
+                (*it)->fMoveToLoc(world->fGetRandomLoc());
+            }
+        }
         world->Tick();
         world->fPrint();
-        printw("x=%f y=%f", obj->loc.X, obj->loc.Y);
         refresh();
     }
 

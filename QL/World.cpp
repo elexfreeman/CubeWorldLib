@@ -1,5 +1,4 @@
 #pragma once
-
 #include "conf.cpp"
 #include "Screen.cpp"
 #include <list>
@@ -9,9 +8,10 @@ class World
 {
 protected:
     Screen *scr;
-    std::list<MObject *> aObject;
 
 public:
+    std::list<MObject *> aObject;
+
     World(Screen *_scr)
     {
         this->scr = _scr;
@@ -53,5 +53,29 @@ public:
             }
         }
         scr->fPrint();
+    }
+
+    /**
+     * Получить случайную локацию в пределах мира
+     * */
+    Coord fGetRandomLoc()
+    {
+        Coord resp;
+        resp.Y = 0;
+        resp.X = 0;
+
+        resp.X = 1 + std::rand() % mx;
+        resp.Y = 1 + std::rand() % my;
+        return resp;
+    }
+
+    /**
+     * Добавить случайную точку
+     * */
+    void fAddRnfPoint()
+    {
+        MObject* obj = new MObject;
+        obj->loc = fGetRandomLoc();
+        fAddObj(obj);
     }
 };
