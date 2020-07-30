@@ -6,48 +6,31 @@
 #include <cmath>
 
 #define buffer_length 200
-
-/*
-// sensors
-     
-   4   1
-     *
-   3   2
-*/
-struct Sensors
-{
-    bool S[3]; // сенсор
-    float L;   // растояние до объекта
-};
-
-struct AIKadr
-{
-    // сенсоры 3-х кадров
-    Sensors *S1;
-    Sensors *S2;
-    Sensors *S3;
-
-    int step; // в какую сторону сделался шаг
-    float L;  // какое стало растояние после шага
-};
+#include "AIHeaders.h"
+#include "AIEqual.h"
 
 class AICtrl
 {
 protected:
     int nState = 0;
-    std::list<AIKadr *> aBuffer;
+    FaBuffer aBuffer;
     int nMaxBufferSize;
+    AIEqual* aieq;
 
 public:
-    AICtrl()
+    AICtrl(AIEqual* _aieq, int _nMaxBufferSize)
     {
-        nMaxBufferSize = buffer_length;
+        nMaxBufferSize = _nMaxBufferSize;
+        this->aieq = _aieq; 
     }
 
     // получить похожий сенсор
-    int fGetEqualSensor(AIKadr *kadr)
+    int fGetEqualSensor(AIKadr kadr)
     {
-        return -1;
+        int res = -1;
+        aieq->fAddABuffer(this->aBuffer);
+        res = aieq->fRun(kadr);
+        return res;
     }
 
     /**
@@ -62,7 +45,7 @@ public:
     /**
      * Добавить кадр в буфер 
      * */
-    int fAddToBuffer(AIKadr *kadr)
+    int fAddToBuffer(AIKadr kadr)
     {
         if (this->aBuffer.size() < this->nMaxBufferSize)
         {
@@ -80,15 +63,15 @@ public:
     /**
      *  Получить куда ходить индекс массива буфера
      * */
-    int fGetNextStep(AIKadr *kadr)
+    int fGetNextStep(AIKadr kadr)
     {
         int res = 0;
         // находим похожую ситуацию из буфера сравнивая показания сенсоров
-        int sensor = this->fGetEqualSensor(kadr);
+        res = this->fGetEqualSensor(kadr);
         // если не нашли делаем рандом
-        if (sensor == -1)
+        if (res == -1)
         {
-            kadr->step = this->fGetRandomStep();
+            kadr.step = this->fGetRandomStep();
             res = this->fAddToBuffer(kadr);
         }
 
