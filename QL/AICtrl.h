@@ -22,13 +22,13 @@ public:
     {
         nMaxBufferSize = _nMaxBufferSize;
         this->aieq = _aieq; 
+        this->aieq->fAddABuffer(this->aBuffer);
     }
 
     // получить похожий сенсор
     int fGetEqualSensor(AIKadr kadr)
     {
         int res = -1;
-        aieq->fAddABuffer(this->aBuffer);
         res = aieq->fRun(kadr);
         return res;
     }

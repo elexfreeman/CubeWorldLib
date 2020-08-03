@@ -1,7 +1,7 @@
 
 CFLAGS=-Wc++11-extensions -lncurses -std=gnu++11  -stdlib=libc++
 
-all:
+run:
 	g++ $(CFLAGS) -c main.cpp
 	g++ $(CFLAGS) -c Screen.cpp
 	g++ $(CFLAGS) -c MObject.cpp
@@ -13,4 +13,14 @@ all:
 
 
 clean:
-	rm -rf *.o ql
+	rm -rf *.o *.gch ql
+
+
+test:
+	g++ $(CFLAGS) -c test.cpp
+	#g++ $(CFLAGS) -c AIHeaders.h
+	#g++ $(CFLAGS) -c AIEqual.h 
+	#g++ $(CFLAGS) -c AICtrl.h
+	g++ $(CFLAGS) test.o  -o test.run
+	make clean
+	./test.run
