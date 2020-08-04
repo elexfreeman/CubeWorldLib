@@ -48,7 +48,6 @@ void testEqual()
     s3.S3 = false;
     s3.S4 = false;
 
-
     Sensors s4;
     s4.L = 13;
     s4.S1 = true;
@@ -57,11 +56,10 @@ void testEqual()
     s4.S4 = false;
 
     AIKadr k;
-    
+
     k.K1 = s1;
     k.K2 = s2;
     k.K3 = s3;
-    k.K4 = s4;
 
     k.L = 14;
     k.step = 1;
@@ -69,8 +67,19 @@ void testEqual()
     FaBuffer aBuffer;
 }
 
+void testDl()
+{
+    AIEqual *eq = new AIEqual();
+
+    if (eq->fEqL(20, 15))
+    {
+        std::cout << "TRUE";
+    }
+}
+
 int main()
 {
 
     std::cout << "test \r\n";
+    testDl();
 }
