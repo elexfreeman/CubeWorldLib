@@ -27,7 +27,46 @@ void testGetRandomStep()
 
 void testEqual()
 {
+    Sensors s1;
+    s1.L = 10;
+    s1.S1 = true;
+    s1.S2 = false;
+    s1.S3 = false;
+    s1.S4 = false;
+
+    Sensors s2;
+    s2.L = 12;
+    s2.S1 = true;
+    s2.S2 = false;
+    s2.S3 = false;
+    s2.S4 = false;
+
+    Sensors s3;
+    s3.L = 13;
+    s3.S1 = true;
+    s3.S2 = false;
+    s3.S3 = false;
+    s3.S4 = false;
+
+
+    Sensors s4;
+    s4.L = 13;
+    s4.S1 = true;
+    s4.S2 = false;
+    s4.S3 = false;
+    s4.S4 = false;
+
+    AIKadr k;
     
+    k.K1 = s1;
+    k.K2 = s2;
+    k.K3 = s3;
+    k.K4 = s4;
+
+    k.L = 14;
+    k.step = 1;
+
+    FaBuffer aBuffer;
 }
 
 int main()
