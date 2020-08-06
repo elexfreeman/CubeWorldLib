@@ -9,9 +9,9 @@
 #include <list>
 #include <string>
 
-#include "MObject.cpp"
-#include "Screen.cpp"
-#include "World.cpp"
+#include "MObject.h"
+#include "Screen.h"
+#include "World.h"
 
 class MyWorld
 {

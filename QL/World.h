@@ -1,8 +1,8 @@
 #pragma once
-#include "conf.cpp"
-#include "Screen.cpp"
 #include <list>
-#include "MObject.cpp"
+#include "conf.h"
+#include "Screen.h"
+#include "MObject.h"
 
 class World
 {

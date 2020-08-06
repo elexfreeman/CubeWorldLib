@@ -115,7 +115,7 @@ AIKadr AIEqual::fRun(AIKadr kadr)
         item = aBuffer.front();
         aBuffer.pop();
         aBuffer.push(item);
-        
+
         if (this->fEqKadr(item, kadr))
         {
             resp = item;
