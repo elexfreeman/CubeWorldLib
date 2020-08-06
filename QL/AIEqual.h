@@ -15,7 +15,8 @@ public:
     ~AIEqual();
     AIEqual *fAddABuffer(FaBuffer _aBuffer);
     AIEqual *fSetDl(int _dL);
-    int fRun(AIKadr kadr);
+
+    AIKadr fRun(AIKadr kadr);
 
     /**
      * Сравнивает кадры 
@@ -53,8 +54,8 @@ AIEqual *AIEqual::fAddABuffer(FaBuffer _aBuffer)
 // ...........L2...
 bool AIEqual::fEqL(float L1, float L2)
 {
-    bool bL1 = (L2 > L1) && (L2 < L1 + this->dL);
-    bool bL2 = (L2 > L1 - this->dL) && (L2 < L1);
+    bool bL1 = (L2 >= L1) && (L2 <= L1 + this->dL);
+    bool bL2 = (L2 >= L1 - this->dL) && (L2 <= L1);
     return bL1 || bL2;
 }
 
@@ -102,11 +103,26 @@ bool AIEqual::fEqKadr(AIKadr kadr1, AIKadr kadr2)
     return true;
 }
 
-int AIEqual::fRun(AIKadr kadr)
+AIKadr AIEqual::fRun(AIKadr kadr)
 {
-    for (auto it = aBuffer.begin(); it != aBuffer.end(); ++it)
+    int i = 0;
+    AIKadr item;
+    AIKadr resp;
+    resp.L = -1;
+
+    while (i < aBuffer.size() - 1)
     {
-        //(*it)->fMoveToLoc(world->fGetRandomLoc());
+        item = aBuffer.front();
+        aBuffer.pop();
+        aBuffer.push(item);
+        
+        if (this->fEqKadr(item, kadr))
+        {
+            resp = item;
+        }
+
+        i++;
     }
-    return -1;
+
+    return resp;
 }

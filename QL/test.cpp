@@ -65,6 +65,22 @@ void testEqual()
     k.step = 1;
 
     FaBuffer aBuffer;
+
+    aBuffer.push(k);
+    aBuffer.push(k);
+    aBuffer.push(k);
+    aBuffer.push(k);
+
+
+    AIEqual *eq = new AIEqual();
+    eq->fAddABuffer(aBuffer);
+
+    AIKadr item;
+    item.L = 2;
+
+    item = eq->fRun(k);
+
+    std::cout << item.L;
 }
 
 void testDl()
@@ -81,5 +97,5 @@ int main()
 {
 
     std::cout << "test \r\n";
-    testDl();
+    testEqual();
 }

@@ -29,7 +29,7 @@ public:
     int fGetEqualSensor(AIKadr kadr)
     {
         int res = -1;
-        res = aieq->fRun(kadr);
+        //res = aieq->fRun(kadr);
         return res;
     }
 
@@ -49,12 +49,12 @@ public:
     {
         if (this->aBuffer.size() < this->nMaxBufferSize)
         {
-            this->aBuffer.push_back(kadr);
+            this->aBuffer.push(kadr);
         }
         else
         {
-            this->aBuffer.pop_front();
-            this->aBuffer.push_back(kadr);
+            this->aBuffer.pop();
+            this->aBuffer.push(kadr);
         }
 
         return this->aBuffer.size() - 1;

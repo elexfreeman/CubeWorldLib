@@ -1,6 +1,6 @@
 #pragma once
 #include <stdlib.h>
-#include <list>
+#include <queue>
 /*
 // sensors
      
@@ -31,4 +31,4 @@ struct AIKadr
 /**
  * Буфер кадров
  * */
-typedef std::list<AIKadr> FaBuffer;
+typedef std::queue<AIKadr> FaBuffer;
