@@ -1,6 +1,7 @@
 #pragma once
-#include <list>
+#include <vector>
 #include "conf.h"
+#include "AIHeaders.h"
 #include "Screen.h"
 #include "MObject.h"
 
@@ -10,7 +11,7 @@ protected:
     Screen *scr;
 
 public:
-    std::list<MObject *> aObject;
+    std::vector<MObject *> aObject;
 
     World(Screen *_scr)
     {
@@ -30,9 +31,9 @@ public:
      * */
     void Tick()
     {
-        for (auto it = aObject.begin(); it != aObject.end(); ++it)
+        for (int i = 0; i < aObject.size(); i++)
         {
-            (*it)->Tick();
+            aObject[i]->Tick();
         }
     }
 
@@ -43,12 +44,12 @@ public:
     {
         int x, y;
         scr->fClear();
-        for (auto it = aObject.begin(); it != aObject.end(); ++it)
+        for (int i = 0; i < aObject.size(); i++)
         {
-            if ((*it)->fIsVisible(mx, my))
+            if (aObject[i]->fIsVisible(mx, my))
             {
-                x = std::round((*it)->loc.X);
-                y = std::round((*it)->loc.Y);
+                x = std::round(aObject[i]->loc.X);
+                y = std::round(aObject[i]->loc.Y);
                 scr->aMatrix[x][y] = 9;
             }
         }
@@ -56,26 +57,12 @@ public:
     }
 
     /**
-     * Получить случайную локацию в пределах мира
-     * */
-    Coord fGetRandomLoc()
-    {
-        Coord resp;
-        resp.Y = 0;
-        resp.X = 0;
-
-        resp.X = 1 + std::rand() % mx;
-        resp.Y = 1 + std::rand() % my;
-        return resp;
-    }
-
-    /**
      * Добавить случайную точку
      * */
-    void fAddRnfPoint()
+    MObject *fAddRnfPoint()
     {
-        MObject* obj = new MObject;
-        obj->loc = this->fGetRandomLoc();
+        MObject *obj = new MObject(fGetRandomLoc());
         fAddObj(obj);
+        return obj;
     }
 };

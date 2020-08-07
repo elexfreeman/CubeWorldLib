@@ -1,5 +1,4 @@
 #include "AIHeaders.h"
-#include "MObject.h"
 #include <cmath>
 class AISensor
 {
@@ -7,11 +6,11 @@ private:
     /* data */
 protected:
     Sensors sensors;
-    MObject *obj;
-    MObject *observer;
+    Coord obj;
+    Coord observer;
 
 public:
-    AISensor(MObject *_obj, MObject *_observer);
+    AISensor(Coord _obj, Coord _observer);
     ~AISensor();
 
     /**
@@ -20,7 +19,7 @@ public:
     Sensors fGetObjInfo();
 };
 
-AISensor::AISensor(MObject *_obj, MObject *_observer)
+AISensor::AISensor(Coord _obj, Coord _observer)
 {
     this->obj = _obj;
     this->observer = _observer;
@@ -32,8 +31,7 @@ AISensor::~AISensor()
 
 Sensors AISensor::fGetObjInfo()
 {
-    sensors.L = std::sqrt((obj->loc.X - observer->loc.X) * (obj->loc.X - observer->loc.X) + (obj->loc.Y - observer->loc.Y) * (obj->loc.Y - observer->loc.Y));
-
+    sensors.L = std::sqrt((obj.X - observer.X) * (obj.X - observer.X) + (obj.Y - observer.Y) * (obj.Y - observer.Y));
 
 /*
 -- sensors --
@@ -43,10 +41,10 @@ Sensors AISensor::fGetObjInfo()
     3   2
 */
 
-    sensors.S1 = (obj->loc.X >= observer->loc.X) && (obj->loc.Y >= observer->loc.Y);
-    sensors.S2 = (obj->loc.X >= observer->loc.X) && (obj->loc.Y <= observer->loc.Y);
-    sensors.S3 = (obj->loc.X <= observer->loc.X) && (obj->loc.Y <= observer->loc.Y);
-    sensors.S4 = (obj->loc.X <= observer->loc.X) && (obj->loc.Y >= observer->loc.Y);
+    sensors.S1 = (obj.X >= observer.X) && (obj.Y >= observer.Y);
+    sensors.S2 = (obj.X >= observer.X) && (obj.Y <= observer.Y);
+    sensors.S3 = (obj.X <= observer.X) && (obj.Y <= observer.Y);
+    sensors.S4 = (obj.X <= observer.X) && (obj.Y >= observer.Y);
 
     return sensors;
 }

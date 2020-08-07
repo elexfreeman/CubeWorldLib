@@ -1,13 +1,8 @@
 #pragma once
-
+#include "AIHeaders.h"
 #include <stdlib.h>
 #include <cmath>
 
-struct Coord
-{
-    float X;
-    float Y;
-};
 
 class MObject
 {
@@ -18,6 +13,11 @@ public:
     Coord loc;
 
     Coord newLoc;
+
+    MObject(Coord _loc)
+    {
+        this->loc = _loc;
+    }
 
     float speed = 20;
 
@@ -31,6 +31,10 @@ public:
         if (state == 1)
         {
             ActionMoveToLoc();
+        }
+        if (state == 0)
+        {
+            fMoveToLoc(fGetRandomLoc());
         }
     }
 
