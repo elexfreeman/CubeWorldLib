@@ -7,7 +7,7 @@
 class MObject
 {
 protected:
-    int state = 0;
+    int nState = 0;
 
 public:
     Coord loc;
@@ -23,16 +23,16 @@ public:
 
     int fGetState()
     {
-        return state;
+        return nState;
     }
 
     void Tick()
     {
-        if (state == 1)
+        if (nState == 1)
         {
             ActionMoveToLoc();
         }
-        if (state == 0)
+        if (nState == 0)
         {
             fMoveToLoc(fGetRandomLoc());
         }
@@ -40,24 +40,24 @@ public:
 
     void ActionMoveToLoc()
     {
-        if (state == 1)
+        if (nState == 1)
         {
             loc.X = (loc.X + (newLoc.X - loc.X) / speed);
             loc.Y = (loc.Y + (newLoc.Y - loc.Y) / speed);
 
             if ((std::round(loc.X) == std::round(newLoc.X)) && (std::round(loc.Y) == std::round(newLoc.Y)))
             {
-                state = 0;
+                nState = 0;
             }
         }
     }
 
     void fMoveToLoc(Coord _newLoc)
     {
-        if (state == 0)
+        if (nState == 0)
         {
             this->newLoc = _newLoc;
-            this->state = 1; // move to loc
+            this->nState = 1; // move to loc
         }
     }
 
