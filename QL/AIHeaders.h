@@ -20,10 +20,7 @@ struct Sensors
 
 struct AIKadr
 {
-  // сенсоры 3-х кадров
-  Sensors K1;
-  Sensors K2;
-  Sensors K3;
+  std::vector<Sensors> kadr;
 
   int step; // в какую сторону сделался шаг
   float L;  // какое стало растояние после шага

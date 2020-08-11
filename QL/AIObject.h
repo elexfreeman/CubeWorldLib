@@ -48,11 +48,22 @@ void AIObject::Tick()
     // ожидание действия
     if (this->nState == 0)
     {
-        if (this->nKadr == 2)
-        {
-            this->nMoveTo = this->ctrl->fGetNextStep(this->kadr);
-            this->nState = 1;
-        }
+        this->nState = 2;
+    }
+    // сбор информации о наблюдаемом объекте
+    if (this->nState == 2)
+    {
+        // получаем инфу
+
+        // сдигаем счетчик кадров
+        this->nKadr++;
+    }
+
+    if (nKadr > 1)
+    {
+        this->nMoveTo = this->ctrl->fGetNextStep(this->kadr);
+        this->nState = 1;
+        this->nState = 0;
     }
 }
 

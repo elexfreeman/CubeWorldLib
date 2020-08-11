@@ -61,11 +61,17 @@ bool AIEqual::fEqL(float L1, float L2)
 
 bool AIEqual::fEqKadr(AIKadr kadr1, AIKadr kadr2)
 {
+    bool resp = true;
     bool eqS1 = false;
     bool eqS2 = false;
     bool eqS3 = false;
     bool eqS4 = false;
     bool eqL = false;
+
+    for (int i = 0; i < kadr1.kadr.size(); i++)
+    {
+
+    }
 
     // первый кадр
     eqS1 = kadr1.K1.S1 == kadr2.K1.S1;
@@ -100,7 +106,7 @@ bool AIEqual::fEqKadr(AIKadr kadr1, AIKadr kadr2)
         return false;
     }
 
-    return true;
+    return resp;
 }
 
 AIKadr AIEqual::fRun(AIKadr kadr)
